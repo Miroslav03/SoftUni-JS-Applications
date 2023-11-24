@@ -40,25 +40,26 @@ async function addNewCatch(event) {
             throw new Error('All fields must be filled!')
         }
         const response = await fetch('http://localhost:3030/data/catches', {
-            method: 'Post',
+            method: 'post',
             headers: {
                 'Content-Type': 'application/json',
                 'X-Authorization': userData.token
             },
-            body:JSON.stringify(data)
-        })
+            body:JSON.stringify(obj)
+        });
         if(!response.ok){
             const error = await response.json();
             throw new Error(error.message);
         }
+
+        event.target.reset()
+        loadCatches()
     } catch (error) {
         alert(error.message)
     }
 }
 
 async function loadCatches(event) {
-    event.preventDefault();
-
     const response = await fetch('http://localhost:3030/data/catches')
     const data = await response.json()
 
