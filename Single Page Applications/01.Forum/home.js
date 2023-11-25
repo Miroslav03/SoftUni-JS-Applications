@@ -1,7 +1,6 @@
 
 import { createElement } from "./utils.js";
 
-const mainHome = document.querySelector('main');
 
 //home topic div
 const topicContainerDiv = document.querySelector('div[class="topic-container"]');
@@ -72,7 +71,9 @@ export async function loadTopics() {
             throw new Error('Error')
         }
         const dataResponse = await response.json();
-    
+        if(Object.keys(dataResponse).length === 0){
+            return
+        }
         topicContainerDiv.replaceChildren();
     
         for (const [id, topic] of Object.entries(dataResponse)) {

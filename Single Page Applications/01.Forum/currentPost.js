@@ -89,7 +89,11 @@ async function loadAllComments(){
         if(!response.ok){
             throw new Error('Error')
         }
+        
         const responseData = await response.json()
+        if(Object.keys(responseData).length === 0){
+            return
+        }
         const filteredComments = Object.entries(responseData).filter(arr => arr[1].id === id)
         for (const [key,obj] of filteredComments) {
             const divTopicNameWrapper = createElement('div', '', divClassComent, { 'class': 'topic-name-wrapper' });
