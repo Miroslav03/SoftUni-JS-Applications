@@ -1,9 +1,17 @@
 export function showCurrentSection(section) {
     //hide all sections
-    document.querySelectorAll('section').forEach((section) => section.style.display = 'none');
+    document.querySelectorAll('.view-section').forEach((section) => section.style.display = 'none');
     //display current section
     section.style.display = 'block';
 }
+
+export function checkOwner(user,movieID){
+    const userId = JSON.parse(user)
+    if(userId._id === movieID){
+        return true;
+    }
+}
+
 
 export function updateNavigation() {
 
@@ -21,3 +29,4 @@ export function updateNavigation() {
         document.querySelectorAll('li[class="nav-item guest"]').forEach((nav) => nav.style.display = 'block')
     }
 }
+
