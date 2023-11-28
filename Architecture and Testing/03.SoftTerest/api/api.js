@@ -10,7 +10,7 @@ export async function request(method, path, data) {
         settings.body = JSON.stringify(data);
     }
 
-    const user = sessionStorage.getItem('user');
+    const user = JSON.parse(sessionStorage.getItem('user'));
 
     if (user) {
         settings.headers['X-Authorization'] = user.accessToken;
@@ -20,11 +20,19 @@ export async function request(method, path, data) {
         const response = await fetch(`${host}${path}`, settings);
 
         if (!response.ok) {
-            throw new Error(response.statusText);
+            if(response.status === 403){
+                sessionStorage.removeItem('user');
+                throw new Error('Access denied')
+            }
+           throw new Error(response.status)
         }
-
-        const responseData = await response.json();
-        return responseData;
+        if(response.status === 204){
+            return response;
+        }else{
+            const responseData = response.json();
+            return responseData;
+        }
+        
 
     } catch (error) {
         alert(error.message);

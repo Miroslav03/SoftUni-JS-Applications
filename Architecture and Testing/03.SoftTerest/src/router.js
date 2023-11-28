@@ -21,15 +21,14 @@ export function initializer(locations) {
         }
     }
 
-    function goTo(path) {
+    function goTo(path,...params) {
         const show = locations[path];
-        show(context);
+        show(context,...params);
     }
 
     function updateNaviagtion(){
-        const user = localStorage.getItem('user');
+        const user = sessionStorage.getItem('user');
         if(user){
-            const ankers =  document.querySelectorAll('a[id="user"]')
             document.querySelectorAll('a[id="user"]').forEach(a => a.style.display = 'block');
             document.querySelectorAll('a[id="guest"]').forEach(a => a.style.display = 'none');
         }else {
