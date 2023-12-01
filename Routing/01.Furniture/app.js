@@ -25,6 +25,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
     page.redirect('/')
 })
 updateNavigation()
+page('index.html', '/');
 page('/', showCatalog);
 page('/create', showCreate);
 page('/login', showLogin);
