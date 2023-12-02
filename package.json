@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "test.js",
   "scripts": {
-    "test": "mocha Routing/01.Furniture/tests/e2e.test.js",
+    "test": "mocha Exams/Exam/tests/e2e.test.js",
     "start": "http-server -a localhost -p 3010 -P http://localhost:3010? -c-1"
   },
   "repository": {
